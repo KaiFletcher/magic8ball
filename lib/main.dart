@@ -1,49 +1,43 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 
-void main() {
-  return runApp(
-    MaterialApp(
-      home: Scaffold(
-        backgroundColor: Colors.blue,
-        appBar: AppBar(
-          title: Text('Magic 8 ball'),
-          backgroundColor: Colors.blue,
-        ),
-        body: DicePage(),
+void main() => runApp(
+      MaterialApp(
+        home: BallPage(),
       ),
-    ),
-  );
-}
+    );
 
-
-class DicePage extends StatefulWidget {
-
-  @override
-  State<DicePage> createState() => _DicePageState();
-}
-
-class _DicePageState extends State<DicePage> {
-
-  var eightball = 1;
-
+class BallPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.blue,
+      appBar: AppBar(
+        backgroundColor: Colors.blue.shade900,
+        title: Text('Ask Me Anything'),
+      ),
+      body: Ball(),
+    );
+  }
+}
 
+class Ball extends StatefulWidget {
+  @override
+  _BallState createState() => _BallState();
+}
+
+class _BallState extends State<Ball> {
+  var ballNumber = 0;
+  @override
+  Widget build(BuildContext context) {
     return Center(
-      child: Row(
-        children: <Widget>[
-          Expanded(
-            child: TextButton(
-              onPressed: () {
-                setState(() {
-                  eightball = Random().nextInt(5) + 1;
-                });
-              },
-              child: Image.asset('images/ball$eightball.png'),
-            ),
-          ),
-        ],
+      child: TextButton(
+        onPressed: () {
+          setState(() {
+            ballNumber = Random().nextInt(5);
+          });
+        },
+        child: Image.asset('images/ball$ballNumber.png'),
       ),
     );
   }
